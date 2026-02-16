@@ -1,1 +1,1 @@
-# pipeline_automation_bugs
+# Automatización de Pipeline - Bugs App
