@@ -1,0 +1,11 @@
+{
+  "name": "bug-management-demo",
+  "version": "1.0.0",
+  "description": "Demo project for bug management CI/CD automation",
+  "main": "bugService.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": "EduSoft DevOps Team",
+  "license": "MIT"
+}
