@@ -1,0 +1,52 @@
+name: Bug Fix CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [closed]
+
+jobs:
+  validate-and-test:
+    name: Validate Bug Fix
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run automated tests
+        run: npm test
+
+  deploy:
+    name: Deploy Fixed Version
+    needs: validate-and-test
+    runs-on: ubuntu-latest
+    if: success()
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Simulate deployment
+        run: |
+          echo "🚀 Deploying fixed version..."
+          mkdir -p deployment-log
+          echo "Deployment executed at $(date)" >> deployment-log/deploy.txt
+          echo "Branch: $GITHUB_REF" >> deployment-log/deploy.txt
+          echo "Commit: $GITHUB_SHA" >> deployment-log/deploy.txt
+          echo "Bug fix deployed successfully!" >> deployment-log/deploy.txt
+
+      - name: Simulate notification to team
+        run: |
+          echo "📢 Notification:"
+          echo "Bug successfully validated and deployed."
